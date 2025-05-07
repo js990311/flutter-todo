@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/models/todo_dto.dart';
+import 'package:flutter_todo/widgets/todo_status_widget.dart';
 
 class TodoItem extends StatelessWidget {
   final TodoDto todo;
@@ -14,14 +15,16 @@ class TodoItem extends StatelessWidget {
       elevation: 1, // 그림자 높이
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: Column(
           children: [
             Row(
               // 제목부
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Flexible(flex: 1, child: Text(todo.status.name)),
+                // Status
+                Flexible(flex: 1, child: TodoStatusWidget(status: todo.status)),
+                // 제목
                 Expanded(
                   child: Text(
                     todo.title,
@@ -31,6 +34,7 @@ class TodoItem extends StatelessWidget {
                     ),
                   ),
                 ),
+                // 수정 버튼
                 Flexible(
                   flex: 1,
                   child: IconButton(
